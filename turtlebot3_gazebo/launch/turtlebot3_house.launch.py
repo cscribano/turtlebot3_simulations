@@ -28,6 +28,7 @@ from launch.substitutions import LaunchConfiguration
 def generate_launch_description():
     launch_file_dir = os.path.join(get_package_share_directory('turtlebot3_gazebo'), 'launch')
     pkg_gazebo_ros = get_package_share_directory('gazebo_ros')
+    gazebo_params_path = os.path.join(get_package_share_directory('turtlebot3_gazebo'),'config','gazebo_params.yml')
 
     use_sim_time = LaunchConfiguration('use_sim_time', default='true')
     x_pose = LaunchConfiguration('x_pose', default='-2.0')
@@ -43,7 +44,7 @@ def generate_launch_description():
         PythonLaunchDescriptionSource(
             os.path.join(pkg_gazebo_ros, 'launch', 'gzserver.launch.py')
         ),
-        launch_arguments={'world': world}.items()
+        launch_arguments={'world': world, 'extra_gazebo_args': '--ros-args --params-file ' + gazebo_params_path}.items()
     )
 
     gzclient_cmd = IncludeLaunchDescription(
