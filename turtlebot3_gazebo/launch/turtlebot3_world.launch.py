@@ -46,7 +46,7 @@ def generate_launch_description():
         PythonLaunchDescriptionSource(
             os.path.join(pkg_gazebo_ros, 'launch', 'gzserver.launch.py')
         ),
-        launch_arguments={'world': world, 'extra_gazebo_args': '--ros-args --params-file ' + gazebo_params_path}.items()
+        launch_arguments={'world': world, 'params_file': gazebo_params_path}.items()
     )
 
     gzclient_cmd = IncludeLaunchDescription(
